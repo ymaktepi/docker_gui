@@ -4,9 +4,14 @@ This project offers multiple Dockerfile/docker-compose.yml pairs to create conta
 ## How to start
 
 - Launch the `create_container.sh` with the following parameters:
-  - container_name: the folder containing the app you want to launch
+  - container_name: the name folder containing the app you want to launch
   - non_root_user: a non root user that will be created, its home folder will contain a shared folder
+  - Example: `create_container.sh ubuntu nichuguen`
+  - Note: For now, the only two valid parameters for `container_name` are:
+    1. `ubuntu`
+    2. `kali`
 - Once this script has been run, the container is ready and started. 
+- Now you can launch GUI applications from your container's shell
 
 ## Warnings
 
