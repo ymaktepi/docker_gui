@@ -1,6 +1,6 @@
 FROM library/ubuntu:latest
 
-RUN apt-get update && apt-get install -y sudo
+RUN apt-get update && apt-get install -y sudo x11-xserver-utils
 
 RUN apt-get install -y gedit
 
@@ -17,4 +17,4 @@ RUN export uid=1000 gid=1000 developer=default_user && \
 USER ${developer}
 ENV HOME /home/${developer}
 
-ENTRYPOINT sleep 10000000
+ENTRYPOINT xhost local:root && sleep 10000000

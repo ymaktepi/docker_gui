@@ -4,7 +4,7 @@ RUN echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" > /e
 
 RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove --purge
 
-RUN apt-get install -y sudo gedit xorg openbox
+RUN apt-get install -y sudo gedit xorg openbox x11-xserver-utils
 
 # Replace 1000 with your user / group id and set your username
 RUN export uid=1000 gid=1000 developer=default_user && \
@@ -19,4 +19,4 @@ RUN export uid=1000 gid=1000 developer=default_user && \
 USER ${developer}
 ENV HOME /home/${developer}
 
-ENTRYPOINT sleep 10000000
+ENTRYPOINT xhost local:root && sleep 10000000
