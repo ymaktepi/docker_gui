@@ -1,7 +1,7 @@
 # docker_gui
 This project offers multiple Dockerfile/docker-compose.yml pairs to create containers that can launch GUI application on the same display as the host using X11 sharing.
 
-## How start
+## How to start
 
 - Launch the `create_container.sh` with the following parameters:
   - container_name: the folder containing the app you want to launch
