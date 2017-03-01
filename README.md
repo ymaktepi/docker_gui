@@ -11,6 +11,7 @@ This project offers multiple Dockerfile/docker-compose.yml pairs to create conta
     1. `ubuntu`
     2. `kali`
 - Once this script has been run, the container is ready and started. 
+- Now you can launch GUI applications from your container's shell
 
 ## Warnings
 
