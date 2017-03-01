@@ -1,0 +1,22 @@
+version: '2.1'
+services:
+
+### Main Container
+
+  kali_app:
+      container_name: kali_app
+      build: ./main
+      image: gui/kali_app
+      volumes:
+          # change the home to the related user in ./main/Dockerfile
+          - ./main/shared:/home/default_user/shared
+          - /tmp/.X11-unix:/tmp/.X11-unix
+      env_file:
+          - ./main/env
+      environment:
+          - "DISPLAY=${DISPLAY}"
+      #cap_add NET_ADMIN and device /dev/net/tun are for network/vpn capabilities
+      cap_add:
+          - NET_ADMIN
+      devices:
+          - "/dev/net/tun"
