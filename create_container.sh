@@ -22,8 +22,37 @@ function create_container
 
     pushd $PATH_TO_SCRIPT/$CONTAINER
     set +e # there can be an error if the script has already been run once and the user has been set to anything else than $DEFAULT_USER
-    sed s/$DEFAULT_USER/$USER_TO_CREATE/ -i docker-compose.yml
-    sed s/$DEFAULT_USER/$USER_TO_CREATE/ -i main/Dockerfile
+    
+    # if MacOS
+    if [ "$(uname)" == "Darwin" ]; then
+        sed -i '' s/DISPLAY=$\{DISPLAY\}/DISPLAY="$(ipconfig getifaddr en1)":0/ docker-compose.yml
+        
+	# check if Brew is installed
+        which -s brew
+	if [[ $? != 0 ]] ; then
+    	    # Install Homebrew
+    	    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	else
+	    echo "Brew is already installed"
+	fi
+        
+        # install socat
+	if brew ls --versions socat > /dev/null; then
+	    echo "socat is already installed"
+        else
+	    brew install socat
+	fi
+    
+    	sed -i '' s/$DEFAULT_USER/$USER_TO_CREATE/ docker-compose.yml
+    	sed -i '' s/$DEFAULT_USER/$USER_TO_CREATE/ main/Dockerfile
+	
+	socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+	sleep 5
+    else
+    	sed s/$DEFAULT_USER/$USER_TO_CREATE/ -i docker-compose.yml
+    	sed s/$DEFAULT_USER/$USER_TO_CREATE/ -i main/Dockerfile
+    fi
+    
     set -e
     docker-compose up --build
     popd

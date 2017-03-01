@@ -1,4 +1,4 @@
-# docker_gui
+# Docker GUI
 This project offers multiple Dockerfile/docker-compose.yml pairs to create containers that can launch GUI application on the same display as the host using X11 sharing.
 
 ## How to start
@@ -10,8 +10,19 @@ This project offers multiple Dockerfile/docker-compose.yml pairs to create conta
   - Note: For now, the only two valid parameters for `container_name` are:
     1. `ubuntu`
     2. `kali`
-- Once this script has been run, the container is ready and started. 
+- Once this script has been run, the container is ready and started.
 - Now you can launch GUI applications from your container's shell
+
+## MacOS
+`create_container.sh` will install brew and socat. Socat will run in port 6000.
+
+If you have the following error :
+
+```bash
+socat[16168] E bind(5, {LEN=0 AF=2 0.0.0.0:6000}, 16): Address already in use
+```
+
+close XQuartz and start `create_container.sh` again.
 
 ## Warnings
 
