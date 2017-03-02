@@ -1,6 +1,10 @@
 FROM library/ubuntu:latest
 
-RUN apt-get update && apt-get install -y sudo x11-xserver-utils
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get dist-upgrade -y
+
+RUN apt-get install -y sudo x11-xserver-utils
 
 RUN apt-get install -y gedit
 
@@ -14,7 +18,10 @@ RUN export uid=1000 gid=1000 developer=default_user && \
     chown ${uid}:${gid} -R /home/${developer}
 
 
-USER ${developer}
-ENV HOME /home/${developer}
+USER default_user
+ENV HOME /home/default_user
 
-ENTRYPOINT xhost local:root && sleep 10000000
+COPY script_xhost.sh /tmp/script_xhost.sh
+RUN cat /tmp/script_xhost.sh >> /home/default_user/.bashrc
+
+ENTRYPOINT echo "The container is ready!" && sleep 10000000
