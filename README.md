@@ -3,10 +3,11 @@ This project offers multiple Dockerfile/docker-compose.yml pairs to create conta
 
 ## How to start
 
-- Launch the `create_container.sh` with the following parameters:
+- Launch the `create_container.sh <container_name> <non_root_user> <install_path>` with the following parameters:
   - container_name: the name folder containing the app you want to launch
   - non_root_user: a non root user that will be created, its home folder will contain a shared folder
-  - Example: `create_container.sh ubuntu nichuguen`
+  - install_path: the path to a folder that will contain the build content (Dockerfile, shared folder, ...)
+  - Example: `create_container.sh ubuntu nichuguen ../install_ubuntu`
   - Note: For now, the only two valid parameters for `container_name` are:
     1. `ubuntu`
     2. `kali`
@@ -26,4 +27,4 @@ close XQuartz and start `create_container.sh` again.
 
 ## Warnings
 
-Since the X11 is shared between the container and the host, the container has access to all the events fired in the host environment.
+Since the X11 is shared between the container and the host, the container has access to all the events fired in the host environment, including keypresses (so beware of what you're running).
