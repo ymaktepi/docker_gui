@@ -1,0 +1,24 @@
+version: '2.1'
+services:
+
+### Main Container
+
+  hadoop1_app:
+      container_name: hadoop1_app
+      build: ./main
+      image: gui/hadoop1_app
+      volumes:
+          # change the home to the related user in ./main/Dockerfile
+          - ./main/shared:/home/default_user/shared
+          - /tmp/.X11-unix:/tmp/.X11-unix
+      env_file:
+          - ./main/env
+      environment:
+          - "DISPLAY=${DISPLAY}"
+      ports:
+          - "127.0.0.1:22:22"
+      #cap_add NET_ADMIN and device /dev/net/tun are for network/vpn capabilities
+      cap_add:
+          - NET_ADMIN
+      devices:
+          - "/dev/net/tun"
