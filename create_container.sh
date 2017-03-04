@@ -25,6 +25,7 @@ function create_container
   mkdir -p $PATH_TO_CONTAINER_OUTPUT
 
   cp -r $PATH_TO_CONTAINER_INPUT/* $PATH_TO_CONTAINER_OUTPUT
+  cp -r $PATH_TO_SCRIPT/common/* $PATH_TO_CONTAINER_OUTPUT/main/
 
   pushd $PATH_TO_CONTAINER_OUTPUT
   set +e # there can be an error if the script has already been run once and the user has been set to anything else than $DEFAULT_USER
