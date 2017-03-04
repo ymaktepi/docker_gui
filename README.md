@@ -8,18 +8,22 @@ This project offers multiple Dockerfile/docker-compose.yml pairs to create conta
   - non_root_user: a non root user that will be created, its home folder will contain a shared folder
   - install_path: the path to a folder that will contain the build content (Dockerfile, shared folder, ...)
   - Example: `create_container.sh ubuntu nichuguen ../install_ubuntu`
+    - Creates a new `ubuntu` container.
+    - The user `nichuguen` will be created and added to the sudoers
+    - A new folder will be created in `../install_ubuntu`. This folder will contain everything needed to deploy new containers (`Dockerfile`, `docker-compose.yml`), as well as a `main/shared` folder, which is mounted into `$HOME/shared`.
   - Note: For now, the only two valid parameters for `container_name` are:
     1. `ubuntu`
     2. `kali`
+    3. `hadoop1`, see the README file in the `hadoop1` folder
 - Once this script has been run, the container is ready and started.
 - Now you can launch GUI applications from your container's shell
 
 ## MacOS
-`create_container.sh` will install brew and socat. Socat will run in port 6000.
+`create_container.sh` will install brew and socat. Socat will run on port 6000.
 
 If you have the following error :
 
-```bash
+```
 socat[16168] E bind(5, {LEN=0 AF=2 0.0.0.0:6000}, 16): Address already in use
 ```
 

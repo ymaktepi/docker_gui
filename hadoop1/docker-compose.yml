@@ -15,10 +15,32 @@ services:
           - ./main/env
       environment:
           - "DISPLAY=${DISPLAY}"
-      ports:
-          - "127.0.0.1:22:22"
       #cap_add NET_ADMIN and device /dev/net/tun are for network/vpn capabilities
       cap_add:
           - NET_ADMIN
       devices:
           - "/dev/net/tun"
+      ports:
+          #based on https://github.com/sequenceiq/hadoop-docker/blob/master/Dockerfile
+          # Hdfs ports
+          - "127.0.0.1:50010:50010"
+          - "127.0.0.1:50020:50020"
+          - "127.0.0.1:50070:50070"
+          - "127.0.0.1:50075:50075"
+          - "127.0.0.1:50090:50090"
+          - "127.0.0.1:8020:8020"
+          - "127.0.0.1:9000:9000"
+          #mapreduce ports
+          - "127.0.0.1:10020:10020"
+          - "127.0.0.1:19888:19888"
+          #Yarn ports
+          - "127.0.0.1:8030:8030"
+          - "127.0.0.1:8031:8031"
+          - "127.0.0.1:8032:8032"
+          - "127.0.0.1:8033:8033"
+          - "127.0.0.1:8040:8040"
+          - "127.0.0.1:8042:8042"
+          - "127.0.0.1:8088:8088"
+          #Other ports
+          - "127.0.0.1:49707:49707"
+          - "127.0.0.1:2122:2122"
